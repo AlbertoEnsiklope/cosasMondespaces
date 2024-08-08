@@ -1,6 +1,6 @@
 # cosasMondespaces
 ```
-cd ./cosasMondespaces && sh launchpad.sh
+git clone https://github.com/AlbertoEnsiklope/cosasMondespaces.git && cd ./cosasMondespaces && sh launchpad.sh
 ```
 
 
