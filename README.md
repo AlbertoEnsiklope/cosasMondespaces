@@ -7,5 +7,5 @@ curl -o panaComejor.sh https://raw.githubusercontent.com/AlbertoEnsiklope/cosasM
 
 Crear usuarios y psswds
 ```
-curl -o crearInfUsuarios.sh https://raw.githubusercontent.com/AlbertoEnsiklope/cosasMondespaces/main/crearInfUsuarios.sh && sudo bash crearInfUsuarios.sh
+sudo curl -o crearInfUsuarios.sh https://raw.githubusercontent.com/AlbertoEnsiklope/cosasMondespaces/main/crearInfUsuarios.sh && sudo bash crearInfUsuarios.sh
 ```
