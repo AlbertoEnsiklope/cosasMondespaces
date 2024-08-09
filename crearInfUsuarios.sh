@@ -11,6 +11,16 @@ generate_random_name() {
     echo "$first_name $last_name"
 }
 
+# Función para generar una contraseña aleatoria de 4 caracteres
+generate_random_password() {
+    chars=({a..z} {A..Z} {0..9})
+    password=""
+    for i in {1..4}; do
+        password+="${chars[$RANDOM % ${#chars[@]}]}"
+    done
+    echo "$password"
+}
+
 # Solicitar al usuario el número de usuarios a crear
 read -p "Introduce el número de usuarios a crear (0-999999): " num_users
 
@@ -23,19 +33,17 @@ fi
 # Preguntar si los usuarios deben ser añadidos al grupo sudo
 read -p "¿Quieres añadir a los usuarios al grupo sudo? (s/n): " add_to_sudo
 
-# Contraseña común para todos los usuarios
-common_password="TuContraseñaSegura"
-
 # Crear los usuarios
 for ((i=1; i<=num_users; i++)); do
     username="wylm$i"
     full_name=$(generate_random_name)
+    random_password=$(generate_random_password)
     
     # Crear el usuario con el nombre completo inventado y su directorio en /home
     useradd -m -c "$full_name" -d "/home/$username" -s /bin/bash "$username"
     
-    # Asignar la contraseña común
-    echo "$username:$common_password" | chpasswd
+    # Asignar la contraseña aleatoria
+    echo "$username:$random_password" | chpasswd
     
     # Añadir al grupo sudo si se seleccionó
     if [[ $add_to_sudo == "s" ]]; then
@@ -48,7 +56,7 @@ for ((i=1; i<=num_users; i++)); do
     chown $username:$username /home/$username/.bashrc /home/$username/.profile
     
     # Mostrar el nombre de usuario y la contraseña
-    echo "Nombre completo: $full_name, Contraseña: $common_password, Usuario: $username"
+    echo "Nombre completo: $full_name, Contraseña: $random_password, Usuario: $username"
 done
 
 echo "Todos los usuarios han sido creados. Total de usuarios creados: $num_users"
