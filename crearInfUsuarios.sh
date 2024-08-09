@@ -50,3 +50,6 @@ for ((i=1; i<=num_users; i++)); do
 done
 
 echo "Todos los usuarios han sido creados. Total de usuarios creados: $num_users"
+echo "Ver todos los usuarios:"
+echo "cut -d: -f1 /etc/passwd"
+echo "Cambio de usuario: su - nombre_de_usuario"
