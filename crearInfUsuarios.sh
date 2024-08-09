@@ -23,6 +23,9 @@ fi
 # Preguntar si los usuarios deben ser añadidos al grupo sudo
 read -p "¿Quieres añadir a los usuarios al grupo sudo? (s/n): " add_to_sudo
 
+# Contraseña común para todos los usuarios
+common_password="TuContraseñaSegura"
+
 # Crear los usuarios
 for ((i=1; i<=num_users; i++)); do
     username="wylm$i"
@@ -31,9 +34,8 @@ for ((i=1; i<=num_users; i++)); do
     # Crear el usuario con el nombre completo inventado y su directorio en /home
     useradd -m -c "$full_name" -d "/home/$username" -s /bin/bash "$username"
     
-    # Generar una contraseña segura
-    password=$(openssl rand -base64 12)
-    echo "$username:$password" | chpasswd
+    # Asignar la contraseña común
+    echo "$username:$common_password" | chpasswd
     
     # Añadir al grupo sudo si se seleccionó
     if [[ $add_to_sudo == "s" ]]; then
@@ -46,7 +48,7 @@ for ((i=1; i<=num_users; i++)); do
     chown $username:$username /home/$username/.bashrc /home/$username/.profile
     
     # Mostrar el nombre de usuario y la contraseña
-    echo "Usuario: $username, Contraseña: $password, Nombre completo: $full_name"
+    echo "Nombre completo: $full_name, Contraseña: $common_password, Usuario: $username"
 done
 
 echo "Todos los usuarios han sido creados. Total de usuarios creados: $num_users"
