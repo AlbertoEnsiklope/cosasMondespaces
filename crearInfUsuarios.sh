@@ -25,7 +25,7 @@ read -p "¿Quieres añadir a los usuarios al grupo sudo? (s/n): " add_to_sudo
 
 # Crear los usuarios
 for ((i=1; i<=num_users; i++)); do
-    username="kim_jong-un_bot$i"
+    username="wylm$i"
     full_name=$(generate_random_name)
     
     # Crear el usuario con el nombre completo inventado y su directorio en /home
