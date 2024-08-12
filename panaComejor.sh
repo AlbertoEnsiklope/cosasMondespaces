@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Detener y eliminar cualquier instancia de VNC y websockify
+pkill vncserver
+pkill websockify
+
+# Eliminar archivos de configuración antiguos
+rm -rf ~/.vnc
+
 # Actualizar los paquetes
 sudo apt update -y
 
